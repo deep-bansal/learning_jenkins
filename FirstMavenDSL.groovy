@@ -10,12 +10,12 @@ job('First-Maven-Project-Via-DSL') {
         scm('* * * * *')
     }
     steps {
-        script {
-            def mvnHome = tool 'LocalMaven'
-            withMaven(maven: 'LocalMaven') {
-                sh "${mvnHome} clean package -f maven-samples/single-module/pom.xml"
-            }
+         invokeMaven {
+            goals('clean package') // Specify Maven goals
+            mavenInstallation('LocalMaven') // Specify the Maven installation name
+            pom('path/to/your/pom.xml') // Specify the path to your pom.xml file
         }
+        
     }
     publishers {
         //archive the war file generated
