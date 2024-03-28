@@ -10,13 +10,7 @@ job('First-Maven-Project-Via-DSL') {
         scm('* * * * *')
     }
     steps {
-       tools {
-            maven('LocalMaven') {
-                // Specify the Maven goals and pom.xml path inside the 'maven' block
-                goals('clean package')
-                pom('maven-samples/single-module/pom.xml')
-            }
-        }
+         maven('clean package', 'maven-samples/single-module/pom.xml')
     }
     publishers {
         //archive the war file generated
