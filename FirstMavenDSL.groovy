@@ -10,8 +10,12 @@ job('First-Maven-Project-Via-DSL') {
         scm('* * * * *')
     }
     steps {
-       tool('LocalMaven') {
-            maven('clean package', 'maven-samples/single-module/pom.xml')
+       tools {
+            maven('LocalMaven') {
+                // Specify the Maven goals and pom.xml path inside the 'maven' block
+                goals('clean package')
+                pom('maven-samples/single-module/pom.xml')
+            }
         }
     }
     publishers {
