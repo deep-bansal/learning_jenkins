@@ -10,7 +10,12 @@ job('First-Maven-Project-Via-DSL') {
         scm('* * * * *')
     }
     steps {
-        maven(goals: 'clean package', mavenInstallation: 'LocalMaven' ,pom: 'maven-samples/single-module/pom.xml')
+        script {
+            def mvnHome = tool 'LocalMaven'
+            withMaven(maven: 'LocalMaven') {
+                sh "${mvnHome} clean package -f maven-samples/single-module/pom.xml"
+            }
+        }
     }
     publishers {
         //archive the war file generated
