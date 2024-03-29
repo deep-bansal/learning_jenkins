@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        copyArtifactPermission('Deploy_app_to_Stage_env,Deploy_app_to_Prod_env');
-    }
     stages {
         stage('Build Application') {
             steps {
@@ -17,9 +14,7 @@ pipeline {
         }
         stage('Deploy in Staging Environment'){
             steps{
-                copyArtifacts(projectName: 'tomcat_pipeline_view');
                 build job: 'Deploy_app_to_Stage_env'
-
             }
             
         }
